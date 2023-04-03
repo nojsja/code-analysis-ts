@@ -1,5 +1,3 @@
-[![npm version](https://badge.fury.io/js/code-analysis-ts.svg)](https://www.npmjs.com/package/code-analysis-ts)
-[![Downloads](https://img.shields.io/npm/dm/code-analysis-ts.svg)](https://www.npmjs.com/package/code-analysis-ts)
 # code-analysis-ts
 
 [code-analysis-ts](https://www.npmjs.com/package/code-analysis-ts)是一款前端代码分析工具，用于实现代码调用分析报告，代码评分，代码告警，“脏调用”拦截，API趋势变化分析等应用场景。支持CLI/API两种使用模式，可快速集成到前端工程化体系中，用于解决大型web应用的前端依赖治理难题。
@@ -11,9 +9,11 @@ npm install code-analysis-ts --save-dev
 // or
 yarn add code-analysis-ts --dev    
 ```
+
 ## Config
 
 新建 analysis.config.js 配置文件:
+
 ```javascript
 const { execSync } = require('child_process');                        // 子进程操作
 const DefaultBranch = 'master';                                       // 默认分支常量
@@ -48,7 +48,9 @@ module.exports = {
     alarmThreshold: 90                                                // 可选，开启代码告警的阈值分数(0-100)，默认为null表示关闭告警逻辑 (CLI模式生效)
 }
 ```
+
 ## Mode
+
 ### 1. cli
 
 ```javascript
@@ -63,6 +65,7 @@ $ npm run analysis
 // or
 $ yarn analysis        
 ```
+
 ### 2. api
 
 ```javascript
@@ -109,12 +112,15 @@ async function scan() {
 
 scan();
 ```
+
 ## Demo
 
 [code-demo](https://github.com/liangxin199045/code-demo)演示如何使用code-analysis-ts的demo项目,使用github pages部署代码分析报告
 
 ## scorePlugin说明
+
 配置文件中的scorePlugin配置项属于“函数插件”，使用者可以自定义代码评分插件来消费分析产物，评分插件需要对分析产物数据结构及属性有一定理解。下面是一个demo:
+
 ```javascript
 // scorePlugin.js
 // 评分插件
@@ -163,14 +169,19 @@ module.exports = {
     ...
 }
 ```
+
 ## analysisPlugin说明
+
 自定义分析插件，分析工具内置插件有type分析，method分析，默认api分析三个插件，如果开发者有更多分析指标的诉求，可以开发特定分析插件(比如分析Class类型的api，分析用于三目运算符表达式中的api,分析导入再导出api等场景)，开发分析插件需要对源码和分析工具架构及生命周期有一定的理解。
 
 ## 自定义插件库
+
 [code-analysis-plugins](https://www.npmjs.com/package/code-analysis-plugins)是与分析工具配套的分析插件库，用于分享一些常用指标分析插件。
 
 ## diagnosisInfos诊断日志说明
+
 诊断日志是在代码分析过程中插件及关键节点产生的错误信息记录，可以帮助开发者调试自定义插件，快速定位代码文件，代码行，AST节点等相关错误信息。
 
 ## vue_temp_ts_dir目录是什么
+
 如果开启了扫描Vue中TS的配置开关，工具会提取Vue中的TS片段进行中转TS处理，该目录是temp临时目录，会在分析结束销毁。
